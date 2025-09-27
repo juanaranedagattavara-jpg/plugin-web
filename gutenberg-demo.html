@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqua Patterns - Demo Gutenberg</title>
+    <style>
+        /* Reset y base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f0f0f0;
+        }
+
+        /* Header del demo */
+        .demo-header {
+            background: #fff;
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .demo-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .device-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .device-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .device-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        .device-btn:hover {
+            background: #f8fafc;
+        }
+
+        .device-btn.active:hover {
+            background: #1d4ed8;
+        }
+
+        /* Contenedor principal */
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Simulación de viewport */
+        .viewport {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .viewport.mobile {
+            max-width: 375px;
+            margin: 0 auto;
+        }
+
+        .viewport.tablet {
+            max-width: 768px;
+            margin: 0 auto;
+        }
+
+        .viewport.desktop {
+            max-width: 100%;
+        }
+
+        /* Estilos de bloques Gutenberg */
+        .wp-block-group {
+            margin: 0;
+        }
+
+        .wp-block-cover {
+            position: relative;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .wp-block-cover__inner-container {
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .wp-block-heading {
+            margin: 0 0 1rem 0;
+            font-weight: 700;
+        }
+
+        .wp-block-heading.has-text-align-center {
+            text-align: center;
+        }
+
+        .wp-block-paragraph {
+            margin: 0 0 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .wp-block-paragraph.has-text-align-center {
+            text-align: center;
+        }
+
+        .wp-block-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .wp-block-button {
+            margin: 0;
+        }
+
+        .wp-block-button__link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .wp-block-button__link:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .wp-block-button.is-style-outline .wp-block-button__link {
+            background: transparent;
+            border: 2px solid #2563eb;
+            color: #2563eb;
+        }
+
+        .wp-block-button.is-style-outline .wp-block-button__link:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .wp-block-columns {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .wp-block-column {
+            flex: 1;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .wp-block-image {
+            margin: 1rem 0;
+        }
+
+        .wp-block-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .wp-block-list {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .wp-block-list li {
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .wp-block-columns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .wp-block-buttons {
+                flex-direction: column;
+            }
+            
+            .wp-block-button__link {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Patrones específicos */
+        .pattern-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+            background: #fafbfc;
+        }
+
+        .pattern-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        /* Formularios */
+        .wp-block-group form {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Newsletter */
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .newsletter-input {
+            flex: 1;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e5e7eb;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #2563eb;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #e5e7eb;
+        }
+
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header del Demo -->
+    <div class="demo-header">
+        <div class="demo-title">🎨 Aqua Patterns - Demo Gutenberg</div>
+        <div class="demo-controls">
+            <div class="device-toggle">
+                <button class="device-btn active" onclick="setViewport('desktop')">🖥️ Desktop</button>
+                <button class="device-btn" onclick="setViewport('tablet')">📱 Tablet</button>
+                <button class="device-btn" onclick="setViewport('mobile')">📱 Móvil</button>
+            </div>
+            <div>
+                <button onclick="togglePatterns()" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    🔄 Recargar Patrones
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="demo-container">
+        <div class="viewport desktop" id="viewport">
+            
+            <!-- Hero Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">🎯 Hero Premium</div>
+                <div class="wp-block-group">
+                    <div class="wp-block-cover">
+                        <div class="wp-block-cover__inner-container">
+                            <h1 class="wp-block-heading has-text-align-center">Transforma tu negocio con soluciones digitales</h1>
+                            <p class="wp-block-paragraph has-text-align-center">Desarrollamos experiencias web excepcionales que impulsan el crecimiento de tu empresa</p>
+                            <div class="wp-block-buttons">
+                                <div class="wp-block-button">
+                                    <a class="wp-block-button__link" href="#contacto">Agendar Demo</a>
+                                </div>
+                                <div class="wp-block-button is-style-outline">
+                                    <a class="wp-block-button__link" href="#servicios">Ver Servicios</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Golden Circle Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">🔄 Golden Circle</div>
+                <div class="wp-block-group">
+                    <h2 class="wp-block-heading has-text-align-center">¿Por qué elegirnos?</h2>
+                    <div class="wp-block-columns">
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">¿Por qué?</h3>
+                            <p class="wp-block-paragraph">Creemos que cada empresa merece una presencia digital excepcional que refleje su verdadero potencial.</p>
+                        </div>
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">¿Cómo?</h3>
+                            <p class="wp-block-paragraph">Combinamos diseño creativo, tecnología avanzada y estrategia digital para crear soluciones únicas.</p>
+                        </div>
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">¿Qué?</h3>
+                            <p class="wp-block-paragraph">Desarrollamos sitios web, aplicaciones y estrategias digitales que impulsan el crecimiento.</p>
+                        </div>
+                    </div>
+                    <div class="wp-block-buttons">
+                        <div class="wp-block-button">
+                            <a class="wp-block-button__link" href="#servicios">Conocer Más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Servicios Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">⚙️ Servicios</div>
+                <div class="wp-block-group">
+                    <h2 class="wp-block-heading has-text-align-center">Nuestros Servicios</h2>
+                    <div class="wp-block-columns">
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">Desarrollo Web</h3>
+                            <p class="wp-block-paragraph">Sitios web modernos, rápidos y optimizados para conversión.</p>
+                            <ul class="wp-block-list">
+                                <li>Diseño responsive</li>
+                                <li>SEO optimizado</li>
+                                <li>Velocidad de carga</li>
+                            </ul>
+                        </div>
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">E-commerce</h3>
+                            <p class="wp-block-paragraph">Tiendas online que venden y convierten visitantes en clientes.</p>
+                            <ul class="wp-block-list">
+                                <li>WooCommerce</li>
+                                <li>Pagos seguros</li>
+                                <li>Gestión de inventario</li>
+                            </ul>
+                        </div>
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">Marketing Digital</h3>
+                            <p class="wp-block-paragraph">Estrategias digitales que aumentan tu visibilidad y ventas.</p>
+                            <ul class="wp-block-list">
+                                <li>Google Ads</li>
+                                <li>Redes sociales</li>
+                                <li>Email marketing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wp-block-buttons">
+                        <div class="wp-block-button">
+                            <a class="wp-block-button__link" href="#contacto">Cotizar Proyecto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">📅 Timeline</div>
+                <div class="wp-block-group">
+                    <h2 class="wp-block-heading has-text-align-center">Nuestro Proceso</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3 class="wp-block-heading">1. Consultoría</h3>
+                            <p class="wp-block-paragraph">Analizamos tus necesidades y definimos la estrategia digital perfecta para tu negocio.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="wp-block-heading">2. Diseño</h3>
+                            <p class="wp-block-paragraph">Creamos prototipos y diseños que reflejan la identidad de tu marca.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="wp-block-heading">3. Desarrollo</h3>
+                            <p class="wp-block-paragraph">Desarrollamos tu proyecto con las mejores tecnologías y prácticas.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3 class="wp-block-heading">4. Lanzamiento</h3>
+                            <p class="wp-block-paragraph">Lanzamos tu proyecto y te acompañamos en el crecimiento digital.</p>
+                        </div>
+                    </div>
+                    <div class="wp-block-buttons">
+                        <div class="wp-block-button">
+                            <a class="wp-block-button__link" href="#casos">Ver Casos de Éxito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">👥 Team</div>
+                <div class="wp-block-group">
+                    <h2 class="wp-block-heading has-text-align-center">Nuestro Equipo</h2>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Juan Pérez">
+                            <h3 class="wp-block-heading">Juan Pérez</h3>
+                            <p class="wp-block-paragraph">CEO & Fundador</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face" alt="María García">
+                            <h3 class="wp-block-heading">María García</h3>
+                            <p class="wp-block-paragraph">Diseñadora UX/UI</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Carlos López">
+                            <h3 class="wp-block-heading">Carlos López</h3>
+                            <p class="wp-block-paragraph">Desarrollador Full Stack</p>
+                        </div>
+                    </div>
+                    <div class="wp-block-buttons">
+                        <div class="wp-block-button">
+                            <a class="wp-block-button__link" href="#contacto">Conocer al Equipo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Casos de Éxito Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">🏆 Casos de Éxito</div>
+                <div class="wp-block-group">
+                    <h2 class="wp-block-heading has-text-align-center">Proyectos que nos enorgullecen</h2>
+                    <div class="wp-block-columns">
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">E-commerce +300% ventas</h3>
+                            <p class="wp-block-paragraph">"Aqua Studio transformó completamente nuestra tienda online. En 6 meses aumentamos las ventas un 300%."</p>
+                            <p class="wp-block-paragraph"><strong>- Ana Martínez, CEO TechStore</strong></p>
+                        </div>
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">Sitio web +500% tráfico</h3>
+                            <p class="wp-block-paragraph">"El nuevo sitio web nos ayudó a posicionarnos como líderes en nuestro sector. El tráfico orgánico se multiplicó por 5."</p>
+                            <p class="wp-block-paragraph"><strong>- Roberto Silva, Marketing Manager</strong></p>
+                        </div>
+                    </div>
+                    <div class="wp-block-buttons">
+                        <div class="wp-block-button">
+                            <a class="wp-block-button__link" href="#casos">Ver Todos los Casos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Galería Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">🖼️ Galería</div>
+                <div class="wp-block-group">
+                    <h2 class="wp-block-heading has-text-align-center">Nuestros Trabajos</h2>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=300&fit=crop" alt="Proyecto 1">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=300&h=300&fit=crop" alt="Proyecto 2">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=300&h=300&fit=crop" alt="Proyecto 3">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=300&fit=crop" alt="Proyecto 4">
+                        </div>
+                    </div>
+                    <div class="wp-block-buttons">
+                        <div class="wp-block-button">
+                            <a class="wp-block-button__link" href="#galeria">Ver Más Proyectos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contacto Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">📞 Contacto</div>
+                <div class="wp-block-group">
+                    <h2 class="wp-block-heading has-text-align-center">Hablemos de tu proyecto</h2>
+                    <div class="wp-block-columns">
+                        <div class="wp-block-column">
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre *</label>
+                                    <input type="text" id="nombre" name="nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="tel" id="telefono" name="telefono">
+                                </div>
+                                <div class="form-group">
+                                    <label for="servicio">Servicio de interés</label>
+                                    <select id="servicio" name="servicio">
+                                        <option value="">Selecciona un servicio</option>
+                                        <option value="web">Desarrollo Web</option>
+                                        <option value="ecommerce">E-commerce</option>
+                                        <option value="marketing">Marketing Digital</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mensaje">Mensaje *</label>
+                                    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                                </div>
+                                <div class="wp-block-button">
+                                    <button type="submit" class="wp-block-button__link">Enviar Mensaje</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">Información de Contacto</h3>
+                            <p class="wp-block-paragraph">📧 info@aquastudio.com</p>
+                            <p class="wp-block-paragraph">📞 +1 (555) 123-4567</p>
+                            <p class="wp-block-paragraph">📍 Madrid, España</p>
+                            <h3 class="wp-block-heading">Horarios</h3>
+                            <p class="wp-block-paragraph">Lunes - Viernes: 9:00 - 18:00</p>
+                            <p class="wp-block-paragraph">Sábados: 10:00 - 14:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">📧 Newsletter</div>
+                <div class="wp-block-group">
+                    <h2 class="wp-block-heading has-text-align-center">Mantente al día</h2>
+                    <div class="wp-block-columns">
+                        <div class="wp-block-column">
+                            <p class="wp-block-paragraph">Suscríbete a nuestro newsletter y recibe las últimas tendencias en desarrollo web, marketing digital y tecnología.</p>
+                            <div class="newsletter-form">
+                                <div class="newsletter-input">
+                                    <input type="email" placeholder="Tu email" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px;">
+                                </div>
+                                <div class="wp-block-button">
+                                    <button class="wp-block-button__link">Suscribirse</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wp-block-column">
+                            <h3 class="wp-block-heading">¿Qué recibirás?</h3>
+                            <ul class="wp-block-list">
+                                <li>Tips de desarrollo web</li>
+                                <li>Casos de estudio</li>
+                                <li>Ofertas exclusivas</li>
+                                <li>Nuevas tecnologías</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-float" onclick="openWhatsApp()">
+        <svg viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+    </div>
+
+    <script>
+        // Función para cambiar viewport
+        function setViewport(device) {
+            const viewport = document.getElementById('viewport');
+            const buttons = document.querySelectorAll('.device-btn');
+            
+            // Remover clase active de todos los botones
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Agregar clase active al botón clickeado
+            event.target.classList.add('active');
+            
+            // Cambiar clase del viewport
+            viewport.className = `viewport ${device}`;
+        }
+
+        // Función para recargar patrones
+        function togglePatterns() {
+            location.reload();
+        }
+
+        // Función para abrir WhatsApp
+        function openWhatsApp() {
+            const message = encodeURIComponent('Hola! Me interesa conocer más sobre sus servicios de desarrollo web.');
+            window.open(`https://wa.me/1234567890?text=${message}`, '_blank');
+        }
+
+        // Función para manejar formulario de contacto
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('¡Mensaje enviado! Te contactaremos pronto.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
