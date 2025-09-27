@@ -1,0 +1,4 @@
+.aqua-max{max-width:1200px;margin-inline:auto}
+.aqua-gap-m>*+*{margin-top:1rem}
+.aqua-whatsapp-float{position:fixed;right:16px;bottom:16px;z-index:9999;display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.15);text-decoration:none}
+@media(min-width:768px){.aqua-whatsapp-float{right:24px;bottom:24px}}
