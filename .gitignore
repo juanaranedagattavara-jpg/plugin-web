@@ -2,6 +2,7 @@
 wordpress/
 uploads/
 wp-config.php
+wp-content/
 
 # Docker
 .env
