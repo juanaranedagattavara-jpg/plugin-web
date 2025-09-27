@@ -1,0 +1,25 @@
+{
+    "version": 3,
+    "title": "Titanium",
+    "settings": {
+        "color": {
+            "palette": [
+                {
+                    "color": "#2c3e50",
+                    "name": "Titanium",
+                    "slug": "aqua"
+                },
+                {
+                    "color": "#ffffff",
+                    "name": "White",
+                    "slug": "white"
+                },
+                {
+                    "color": "#34495e",
+                    "name": "Dark",
+                    "slug": "dark"
+                }
+            ]
+        }
+    }
+}

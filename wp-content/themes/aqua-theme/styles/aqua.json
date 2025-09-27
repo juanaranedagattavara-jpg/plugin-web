@@ -1,0 +1,25 @@
+{
+    "version": 3,
+    "title": "Aqua",
+    "settings": {
+        "color": {
+            "palette": [
+                {
+                    "color": "#007cba",
+                    "name": "Aqua",
+                    "slug": "aqua"
+                },
+                {
+                    "color": "#ffffff",
+                    "name": "White",
+                    "slug": "white"
+                },
+                {
+                    "color": "#1a1a1a",
+                    "name": "Dark",
+                    "slug": "dark"
+                }
+            ]
+        }
+    }
+}

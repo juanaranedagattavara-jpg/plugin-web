@@ -1,0 +1,25 @@
+{
+    "version": 3,
+    "title": "Onyx",
+    "settings": {
+        "color": {
+            "palette": [
+                {
+                    "color": "#000000",
+                    "name": "Onyx",
+                    "slug": "aqua"
+                },
+                {
+                    "color": "#ffffff",
+                    "name": "White",
+                    "slug": "white"
+                },
+                {
+                    "color": "#1a1a1a",
+                    "name": "Dark",
+                    "slug": "dark"
+                }
+            ]
+        }
+    }
+}

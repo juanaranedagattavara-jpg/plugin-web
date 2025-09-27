@@ -1,0 +1,45 @@
+/* Aqua Patterns - Frontend Styles */
+
+/* Estilos base para patrones */
+.aqua-pattern {
+    margin: 0;
+}
+
+/* Estilos reutilizables */
+.is-style-card-elevated {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.is-style-card-elevated:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.is-style-btn-ghost {
+    background: transparent;
+    border: 2px solid var(--wp--preset--color--aqua, #007cba);
+    color: var(--wp--preset--color--aqua, #007cba);
+}
+
+.is-style-btn-ghost:hover {
+    background: var(--wp--preset--color--aqua, #007cba);
+    color: var(--wp--preset--color--white, #ffffff);
+}
+
+.is-style-cols-gap-xl {
+    gap: 48px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .is-style-cols-gap-xl {
+        gap: 24px;
+    }
+    
+    .is-style-card-elevated {
+        padding: 1.5rem;
+    }
+}

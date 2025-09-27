@@ -1,0 +1,51 @@
+/*
+Theme Name: Aqua Theme
+Description: Tema de bloques moderno con Full Site Editing y tokens globales.
+Version: 1.0.0
+Requires at least: 6.6
+Tested up to: 6.6
+Requires PHP: 7.4
+Author: Aqua Studio
+Text Domain: aqua
+*/
+
+/* Estilos base del tema */
+body {
+    font-family: var(--wp--preset--font-family--inter, 'Inter', sans-serif);
+    line-height: 1.6;
+    color: var(--wp--preset--color--dark, #1a1a1a);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--wp--preset--font-family--inter, 'Inter', sans-serif);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1rem 0;
+}
+
+/* Botones */
+.wp-block-button__link {
+    border-radius: var(--wp--preset--spacing--s, 8px);
+    padding: var(--wp--preset--spacing--s, 8px) var(--wp--preset--spacing--m, 16px);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Grupos */
+.wp-block-group {
+    margin: 0;
+}
+
+/* Columnas */
+.wp-block-columns {
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .wp-block-columns {
+        flex-direction: column;
+    }
+}
