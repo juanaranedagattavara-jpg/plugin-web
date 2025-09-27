@@ -401,6 +401,70 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* Header y Footer */
+        .wp-block-navigation {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .wp-block-navigation ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wp-block-navigation a {
+            color: #374151;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .wp-block-navigation a:hover {
+            color: #2563eb;
+        }
+
+        .wp-block-social-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wp-block-social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #6b7280;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .wp-block-social-links a:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive para Header/Footer */
+        @media (max-width: 768px) {
+            .wp-block-navigation ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .wp-block-social-links {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -425,22 +489,60 @@
     <div class="demo-container">
         <div class="viewport desktop" id="viewport">
             
+            <!-- Header Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">🏠 Header Profesional</div>
+                <div class="wp-block-group" style="padding: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; background: #ffffff; border-bottom: 1px solid #e5e7eb;">
+                    <div class="wp-block-group" style="display: flex; align-items: center; gap: 10px;">
+                        <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=80&h=80&fit=crop&crop=center" alt="Logo Aqua Studio" width="40" height="40" style="border-radius: 4px;">
+                        <h3 style="font-size: 1.25rem; font-weight: 600; color: #374151; margin: 0;"><a href="#inicio" style="color: #374151; text-decoration: none;">Aqua Studio</a></h3>
+                    </div>
+                    <nav class="wp-block-navigation">
+                        <ul>
+                            <li><a href="#servicios">Servicios</a></li>
+                            <li><a href="#nosotros">Nosotros</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
+                            <li><a href="#blog">Blog</a></li>
+                        </ul>
+                    </nav>
+                    <div class="wp-block-buttons">
+                        <div class="wp-block-button is-style-outline">
+                            <a class="wp-block-button__link" href="" style="border: 2px solid #2563eb; color: #2563eb; background: transparent; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none;">Descarga Guía Gratuita</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Hero Pattern -->
             <div class="pattern-section">
-                <div class="pattern-title">🎯 Hero Premium</div>
-                <div class="wp-block-group">
-                    <div class="wp-block-cover">
-                        <div class="wp-block-cover__inner-container">
-                            <h1 class="wp-block-heading has-text-align-center">Transforma tu negocio con soluciones digitales</h1>
-                            <p class="wp-block-paragraph has-text-align-center">Desarrollamos experiencias web excepcionales que impulsan el crecimiento de tu empresa</p>
-                            <div class="wp-block-buttons">
-                                <div class="wp-block-button">
-                                    <a class="wp-block-button__link" href="#contacto">Agendar Demo</a>
-                                </div>
-                                <div class="wp-block-button is-style-outline">
-                                    <a class="wp-block-button__link" href="#servicios">Ver Servicios</a>
-                                </div>
-                            </div>
+                <div class="pattern-title">🎯 Hero Regenerativo con Métricas</div>
+                <div class="wp-block-group" style="padding: 24px 0; background: #f8fafc;">
+                    <h1 class="wp-block-heading has-text-align-center" style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1.5rem; color: #1f2937;">DESARROLLO TERRITORIAL REGENERATIVO DESDE Y HACIA LATINOAMÉRICA</h1>
+                    <p class="wp-block-paragraph has-text-align-center" style="font-size: 1.25rem; margin-bottom: 2rem; color: #6b7280; max-width: 800px; margin-left: auto; margin-right: auto;">Impulsamos proyectos de desarrollo territorial que devuelven vitalidad a los ecosistemas, fortalecen comunidades y generan prosperidad consciente y regenerativa.</p>
+                    <div class="wp-block-buttons" style="justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+                        <div class="wp-block-button">
+                            <a class="wp-block-button__link" href="" style="background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500;">Conoce Nuestros Servicios</a>
+                        </div>
+                        <div class="wp-block-button is-style-outline">
+                            <a class="wp-block-button__link" href="" style="border: 2px solid #2563eb; color: #2563eb; background: transparent; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500;">Descarga Guía Gratuita</a>
+                        </div>
+                    </div>
+                    <div class="wp-block-columns" style="display: flex; gap: 2rem; max-width: 800px; margin: 0 auto;">
+                        <div class="wp-block-column" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h3 style="font-size: 2rem; font-weight: 700; color: #2563eb; margin: 0 0 0.5rem 0;">1,200+</h3>
+                            <p style="margin: 0; color: #6b7280;"><strong>Personas</strong><br/>Beneficiadas</p>
+                        </div>
+                        <div class="wp-block-column" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h3 style="font-size: 2rem; font-weight: 700; color: #2563eb; margin: 0 0 0.5rem 0;">25+</h3>
+                            <p style="margin: 0; color: #6b7280;"><strong>Comunidades</strong><br/>Atendidas</p>
+                        </div>
+                        <div class="wp-block-column" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h3 style="font-size: 2rem; font-weight: 700; color: #2563eb; margin: 0 0 0.5rem 0;">15+</h3>
+                            <p style="margin: 0; color: #6b7280;"><strong>Proyectos</strong><br/>Exitosos</p>
+                        </div>
+                        <div class="wp-block-column" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h3 style="font-size: 2rem; font-weight: 700; color: #2563eb; margin: 0 0 0.5rem 0;">98%</h3>
+                            <p style="margin: 0; color: #6b7280;"><strong>Satisfacción</strong></p>
                         </div>
                     </div>
                 </div>
@@ -704,6 +806,63 @@
                                 <li>Ofertas exclusivas</li>
                                 <li>Nuevas tecnologías</li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Pattern -->
+            <div class="pattern-section">
+                <div class="pattern-title">🦶 Footer Principal</div>
+                <div class="wp-block-group">
+                    <div class="wp-block-group" style="padding: 3rem 1rem; background: #374151; color: white;">
+                        <div class="wp-block-columns" style="gap: 2rem;">
+                            <div class="wp-block-column" style="flex: 1;">
+                                <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=120&h=120&fit=crop&crop=center" alt="Logo Aqua Studio" width="60" height="60" style="border-radius: 50%; margin-bottom: 1rem;">
+                                <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 1rem;">Aqua Studio</h3>
+                                <p style="font-size: 0.9rem; line-height: 1.6; color: white; margin-bottom: 1rem;">Desarrollamos experiencias web excepcionales que impulsan el crecimiento de tu empresa.</p>
+                            </div>
+                            <div class="wp-block-column" style="flex: 1;">
+                                <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 1rem;">Servicios</h4>
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.5rem;"><a href="#servicios" style="color: white; text-decoration: none;">Desarrollo Web</a></li>
+                                    <li style="margin-bottom: 0.5rem;"><a href="#servicios" style="color: white; text-decoration: none;">E-commerce</a></li>
+                                    <li style="margin-bottom: 0.5rem;"><a href="#servicios" style="color: white; text-decoration: none;">Marketing Digital</a></li>
+                                    <li style="margin-bottom: 0.5rem;"><a href="#servicios" style="color: white; text-decoration: none;">Consultoría</a></li>
+                                </ul>
+                            </div>
+                            <div class="wp-block-column" style="flex: 1;">
+                                <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 1rem;">Empresa</h4>
+                                <ul style="list-style: none; padding: 0; margin: 0;">
+                                    <li style="margin-bottom: 0.5rem;"><a href="#nosotros" style="color: white; text-decoration: none;">Sobre Nosotros</a></li>
+                                    <li style="margin-bottom: 0.5rem;"><a href="#equipo" style="color: white; text-decoration: none;">Nuestro Equipo</a></li>
+                                    <li style="margin-bottom: 0.5rem;"><a href="#casos" style="color: white; text-decoration: none;">Casos de Éxito</a></li>
+                                    <li style="margin-bottom: 0.5rem;"><a href="#blog" style="color: white; text-decoration: none;">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div class="wp-block-column" style="flex: 1;">
+                                <h4 style="font-size: 1rem; font-weight: 600; color: white; margin-bottom: 1rem;">Contacto</h4>
+                                <p style="font-size: 0.9rem; color: white; margin-bottom: 0.5rem;">📧 <a href="mailto:info@aquastudio.com" style="color: white; text-decoration: none;">info@aquastudio.com</a></p>
+                                <p style="font-size: 0.9rem; color: white; margin-bottom: 0.5rem;">📞 <a href="tel:+1234567890" style="color: white; text-decoration: none;">+1 (555) 123-4567</a></p>
+                                <p style="font-size: 0.9rem; color: white; margin-bottom: 0.5rem;">📍 Madrid, España</p>
+                                <p style="font-size: 0.9rem; color: white; margin-bottom: 1rem;">🕒 Lun-Vie: 9:00-18:00</p>
+                                <div class="wp-block-social-links">
+                                    <a href="https://linkedin.com/company/aquastudio" aria-label="LinkedIn">📱</a>
+                                    <a href="https://twitter.com/aquastudio" aria-label="Twitter">🐦</a>
+                                    <a href="https://instagram.com/aquastudio" aria-label="Instagram">📷</a>
+                                    <a href="https://youtube.com/@aquastudio" aria-label="YouTube">📺</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wp-block-group" style="padding: 1rem; border-top: 1px solid #4b5563; background: #374151;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                            <p style="font-size: 0.8rem; color: white; margin: 0;">© 2024 Aqua Studio. Todos los derechos reservados.</p>
+                            <p style="font-size: 0.8rem; color: white; margin: 0;">
+                                <a href="#privacidad" style="color: white; text-decoration: none;">Política de Privacidad</a> | 
+                                <a href="#cookies" style="color: white; text-decoration: none;">Cookies</a> | 
+                                <a href="#terminos" style="color: white; text-decoration: none;">Términos</a>
+                            </p>
                         </div>
                     </div>
                 </div>

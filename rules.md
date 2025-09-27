@@ -249,3 +249,4 @@ Un patrón está "hecho" cuando:
 5. ¿Es escalable para futuros patrones?
 
 **SI LA RESPUESTA ES NO A CUALQUIERA → NO HACERLO**
+
