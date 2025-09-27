@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Aqua Patterns
- * Description: Catalogo de patrones Gutenberg — ligero, responsive movil/iPad, SEO/A11y, CTAs PRO, listo para Woo/Membresias.
- * Version: 3.2.0
+ * Description: Catálogo de patrones Gutenberg — ligero, responsive móvil/iPad, SEO/A11y, CTAs PRO, listo para Woo/Membresías.
+ * Version: 3.1.0
  * Requires at least: 6.6
  * Requires PHP: 7.4
  * Author: Aqua Studio
@@ -47,30 +47,12 @@ function aqua_get_pattern_header($file, $key){
 }
 
 add_action('enqueue_block_editor_assets', function(){
-  wp_enqueue_style('aqua-patterns-editor', plugin_dir_url(__FILE__).'assets/editor.css', [], '3.2.0');
+  wp_enqueue_style('aqua-patterns-editor', plugin_dir_url(__FILE__).'assets/editor.css', [], '3.1.0');
 });
 
 add_action('wp_enqueue_scripts', function(){
-  // ACTIVAR CSS DEL FRONTEND AUTOMATICAMENTE
-  $enable = apply_filters('aqua_enable_frontend_css', true);
+  $enable = apply_filters('aqua_enable_frontend_css', false);
   if ($enable) {
-    wp_enqueue_style('aqua-patterns-frontend', plugin_dir_url(__FILE__).'assets/frontend.css', [], '3.2.0');
+    wp_enqueue_style('aqua-patterns-frontend', plugin_dir_url(__FILE__).'assets/frontend.css', [], '3.1.0');
   }
 });
-
-// Asegurar soporte para bloques en el tema
-add_action('after_setup_theme', function(){
-  add_theme_support('wp-block-styles');
-  add_theme_support('align-wide');
-  add_theme_support('editor-styles');
-  add_theme_support('responsive-embeds');
-  add_theme_support('html5', ['script', 'style']);
-});
-
-// Agregar clases CSS a los patrones
-add_filter('render_block', function($block_content, $block) {
-  if (strpos($block['blockName'], 'core/') === 0) {
-    $block_content = str_replace('<div class="wp-block-group">', '<div class="wp-block-group aqua-pattern">', $block_content);
-  }
-  return $block_content;
-}, 10, 2);

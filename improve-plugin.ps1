@@ -1,4 +1,95 @@
-/* AQUA PATTERNS - CSS PROFESIONAL COMPLETO */
+Write-Host "Mejorando plugin Aqua Patterns..." -ForegroundColor Green
+
+# 1. Hacer backup
+Copy-Item "aqua-patterns/aqua-patterns.php" "aqua-patterns/aqua-patterns.php.backup"
+Write-Host "Backup creado: aqua-patterns.php.backup" -ForegroundColor Yellow
+
+# 2. Actualizar plugin principal
+$pluginContent = @'
+<?php
+/**
+ * Plugin Name: Aqua Patterns
+ * Description: Catálogo de patrones Gutenberg — ligero, responsive móvil/iPad, SEO/A11y, CTAs PRO, listo para Woo/Membresías.
+ * Version: 3.2.0
+ * Requires at least: 6.6
+ * Requires PHP: 7.4
+ * Author: Aqua Studio
+ * Text Domain: aqua
+ */
+if ( ! defined('ABSPATH') ) exit;
+
+require_once __DIR__ . '/includes/class-aqua-requirements.php';
+require_once __DIR__ . '/includes/admin-notices.php';
+
+register_activation_hook(__FILE__, ['Aqua_Requirements','on_activation']);
+add_action('admin_init', ['Aqua_Requirements','runtime_checks']);
+
+add_action('init', function () {
+  if (!function_exists('register_block_pattern') || !function_exists('register_block_pattern_category')) return;
+  register_block_pattern_category('aqua', ['label' => __('Aqua','aqua')]);
+
+  $dir = plugin_dir_path(__FILE__) . 'patterns/';
+  if (!is_dir($dir)) return;
+  foreach (glob($dir.'*.html') as $file) {
+    $slug = basename($file, '.html');
+    $title = aqua_get_pattern_header($file, 'Title') ?: ucfirst(str_replace('-', ' ', $slug));
+    $desc  = aqua_get_pattern_header($file, 'Description') ?: '';
+    $cats  = aqua_get_pattern_header($file, 'Categories') ?: 'aqua';
+    $cats  = array_filter(array_map('trim', explode(',', $cats)));
+    $content = file_get_contents($file);
+    if ($content) {
+      register_block_pattern('aqua/'.$slug, [
+        'title'       => $title,
+        'description' => $desc,
+        'categories'  => $cats,
+        'content'     => $content,
+      ]);
+    }
+  }
+});
+
+function aqua_get_pattern_header($file, $key){
+  $c = @file_get_contents($file);
+  if (!$c) return '';
+  return preg_match('/^\s*<!--\s*'.$key.'\s*:\s*(.*?)\s*-->/mi', $c, $m) ? trim($m[1]) : '';
+}
+
+add_action('enqueue_block_editor_assets', function(){
+  wp_enqueue_style('aqua-patterns-editor', plugin_dir_url(__FILE__).'assets/editor.css', [], '3.2.0');
+});
+
+add_action('wp_enqueue_scripts', function(){
+  // ACTIVAR CSS DEL FRONTEND AUTOMÁTICAMENTE
+  $enable = apply_filters('aqua_enable_frontend_css', true);
+  if ($enable) {
+    wp_enqueue_style('aqua-patterns-frontend', plugin_dir_url(__FILE__).'assets/frontend.css', [], '3.2.0');
+  }
+});
+
+// Asegurar soporte para bloques en el tema
+add_action('after_setup_theme', function(){
+  add_theme_support('wp-block-styles');
+  add_theme_support('align-wide');
+  add_theme_support('editor-styles');
+  add_theme_support('responsive-embeds');
+  add_theme_support('html5', ['script', 'style']);
+});
+
+// Agregar clases CSS a los patrones
+add_filter('render_block', function($block_content, $block) {
+  if (strpos($block['blockName'], 'core/') === 0) {
+    $block_content = str_replace('<div class="wp-block-group">', '<div class="wp-block-group aqua-pattern">', $block_content);
+  }
+  return $block_content;
+}, 10, 2);
+'@
+
+Set-Content "aqua-patterns/aqua-patterns.php" $pluginContent
+Write-Host "Plugin principal actualizado!" -ForegroundColor Green
+
+# 3. Crear CSS profesional completo
+$cssContent = @'
+/* ===== AQUA PATTERNS - CSS PROFESIONAL COMPLETO ===== */
 
 /* Reset y base */
 .aqua-patterns *,
@@ -54,7 +145,7 @@
   min-width: 0;
 }
 
-/* Titulos */
+/* Títulos */
 .wp-block-heading {
   margin: 0 0 1rem 0;
   line-height: 1.2;
@@ -86,7 +177,7 @@
   color: #34495e;
 }
 
-/* Parrafos */
+/* Párrafos */
 .wp-block-paragraph {
   margin: 0 0 1rem 0;
   line-height: 1.6;
@@ -148,7 +239,7 @@
   box-shadow: 0 4px 12px rgba(0, 124, 186, 0.3);
 }
 
-/* Imagenes */
+/* Imágenes */
 .wp-block-image {
   margin: 0;
   padding: 0;
@@ -173,7 +264,7 @@
   color: #555;
 }
 
-/* Navegacion */
+/* Navegación */
 .wp-block-navigation {
   margin: 0;
   padding: 0;
@@ -368,52 +459,58 @@
     font-size: 1rem;
   }
 }
+'@
 
-/* Hero específico - Comunidades Locales */
-.wp-block-group.alignfull .wp-block-heading h1 {
-  font-size: 3.5rem;
-  margin-bottom: 2rem;
-  color: #2c3e50;
-  font-weight: 700;
-  line-height: 1.1;
-}
+Set-Content "aqua-patterns/assets/frontend.css" $cssContent
+Write-Host "CSS profesional actualizado!" -ForegroundColor Green
 
-.wp-block-group.alignfull .wp-block-paragraph {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  color: #555;
-  margin-bottom: 3rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
+# 4. Simplificar patrones problemáticos
+Write-Host "Simplificando patrones problemáticos..." -ForegroundColor Yellow
 
-/* Tarjetas de métricas */
-.wp-block-group.has-background {
-  border-radius: 12px;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  background-color: #f8f9fa !important;
-}
+# Hero simplificado
+$heroContent = @'
+<!-- Title: Hero Regenerativo -->
+<!-- Slug: hero -->
+<!-- Categories: aqua -->
+<!-- Description: Hero con título, subtítulo y CTAs -->
 
-.wp-block-group.has-background .wp-block-heading h3 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #007cba;
-  margin-bottom: 0.5rem;
-}
+<!-- wp:group {"align":"full","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull">
+  <!-- wp:heading {"textAlign":"center","level":1} -->
+  <h1 class="has-text-align-center">DESARROLLO TERRITORIAL REGENERATIVO</h1>
+  <!-- /wp:heading -->
+  
+  <!-- wp:paragraph {"align":"center"} -->
+  <p class="has-text-align-center">Impulsamos proyectos de desarrollo territorial que devuelven vitalidad a los ecosistemas.</p>
+  <!-- /wp:paragraph -->
+  
+  <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
+  <div class="wp-block-buttons">
+    <!-- wp:button {"className":"is-style-fill"} -->
+    <div class="wp-block-button is-style-fill">
+      <a class="wp-block-button__link">Conoce Nuestros Servicios</a>
+    </div>
+    <!-- /wp:button -->
+  </div>
+  <!-- /wp:buttons -->
+</div>
+<!-- /wp:group -->
+'@
 
-.wp-block-group.has-background .wp-block-paragraph {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin: 0;
-}
+Set-Content "aqua-patterns/patterns/hero.html" $heroContent
+Write-Host "Patrón Hero simplificado!" -ForegroundColor Yellow
 
-/* Botones mejorados */
-.wp-block-button__link {
-  padding: 16px 32px;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
+Write-Host "`n✅ MEJORAS APLICADAS:" -ForegroundColor Green
+Write-Host "   • CSS del frontend activado automáticamente" -ForegroundColor White
+Write-Host "   • Soporte para bloques agregado" -ForegroundColor White
+Write-Host "   • CSS profesional completo incluido" -ForegroundColor White
+Write-Host "   • Patrones simplificados para compatibilidad" -ForegroundColor White
+Write-Host "   • Responsive design mejorado" -ForegroundColor White
+
+Write-Host "`n🔄 PRÓXIMOS PASOS:" -ForegroundColor Cyan
+Write-Host "   1. Reinicia WordPress: docker-compose restart" -ForegroundColor White
+Write-Host "   2. Ve a http://localhost:8080" -ForegroundColor White
+Write-Host "   3. Los patrones ahora se verán con diseño completo" -ForegroundColor White
+Write-Host "   4. No más errores de bloques inválidos" -ForegroundColor White
+
+Write-Host "`n🎉 ¡Plugin mejorado exitosamente!" -ForegroundColor Green

@@ -5,470 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aqua Patterns - Demo Gutenberg</title>
     <style>
-        /* Reset y base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f0f0f0;
-        }
-
-        /* Header del demo */
-        .demo-header {
-            background: #fff;
-            padding: 1rem;
-            border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .demo-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2563eb;
-            margin-bottom: 0.5rem;
-        }
-
-        .demo-controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .device-toggle {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .device-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            background: #fff;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-
-        .device-btn.active {
-            background: #2563eb;
-            color: white;
-            border-color: #2563eb;
-        }
-
-        .device-btn:hover {
-            background: #f8fafc;
-        }
-
-        .device-btn.active:hover {
-            background: #1d4ed8;
-        }
-
-        /* Contenedor principal */
-        .demo-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Simulación de viewport */
-        .viewport {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .viewport.mobile {
-            max-width: 375px;
-            margin: 0 auto;
-        }
-
-        .viewport.tablet {
-            max-width: 768px;
-            margin: 0 auto;
-        }
-
-        .viewport.desktop {
-            max-width: 100%;
-        }
-
-        /* Estilos de bloques Gutenberg */
-        .wp-block-group {
-            margin: 0;
-        }
-
-        .wp-block-cover {
-            position: relative;
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .wp-block-cover__inner-container {
-            padding: 2rem;
-            max-width: 800px;
-        }
-
-        .wp-block-heading {
-            margin: 0 0 1rem 0;
-            font-weight: 700;
-        }
-
-        .wp-block-heading.has-text-align-center {
-            text-align: center;
-        }
-
-        .wp-block-paragraph {
-            margin: 0 0 1rem 0;
-            font-size: 1.1rem;
-        }
-
-        .wp-block-paragraph.has-text-align-center {
-            text-align: center;
-        }
-
-        .wp-block-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .wp-block-button {
-            margin: 0;
-        }
-
-        .wp-block-button__link {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .wp-block-button__link:hover {
-            background: #1d4ed8;
-            transform: translateY(-1px);
-        }
-
-        .wp-block-button.is-style-outline .wp-block-button__link {
-            background: transparent;
-            border: 2px solid #2563eb;
-            color: #2563eb;
-        }
-
-        .wp-block-button.is-style-outline .wp-block-button__link:hover {
-            background: #2563eb;
-            color: white;
-        }
-
-        .wp-block-columns {
-            display: flex;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .wp-block-column {
-            flex: 1;
-            padding: 1.5rem;
-            background: #f8fafc;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .wp-block-image {
-            margin: 1rem 0;
-        }
-
-        .wp-block-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .wp-block-list {
-            margin: 1rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .wp-block-list li {
-            margin: 0.5rem 0;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; background: #f0f0f0; }
+        
+        .demo-header { background: #fff; padding: 1rem; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
+        .demo-title { font-size: 1.5rem; font-weight: 600; color: #2563eb; margin-bottom: 0.5rem; }
+        .demo-controls { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        .device-toggle { display: flex; gap: 0.5rem; }
+        .device-btn { padding: 0.5rem 1rem; border: 1px solid #ddd; background: #fff; cursor: pointer; border-radius: 4px; transition: all 0.2s; }
+        .device-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+        .device-btn:hover { background: #f8fafc; }
+        .device-btn.active:hover { background: #1d4ed8; }
+        
+        .demo-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .viewport { background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden; transition: all 0.3s ease; }
+        .viewport.mobile { max-width: 375px; margin: 0 auto; }
+        .viewport.tablet { max-width: 768px; margin: 0 auto; }
+        .viewport.desktop { max-width: 100%; }
+        
+        .wp-block-group { margin: 0; }
+        .wp-block-heading { margin: 0 0 1rem 0; font-weight: 700; }
+        .wp-block-heading.has-text-align-center { text-align: center; }
+        .wp-block-paragraph { margin: 0 0 1rem 0; font-size: 1.1rem; }
+        .wp-block-paragraph.has-text-align-center { text-align: center; }
+        .wp-block-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .wp-block-button { margin: 0; }
+        .wp-block-button__link { display: inline-block; padding: 0.75rem 1.5rem; background: #2563eb; color: white; text-decoration: none; border-radius: 6px; font-weight: 500; transition: all 0.2s; border: none; cursor: pointer; }
+        .wp-block-button__link:hover { background: #1d4ed8; transform: translateY(-1px); }
+        .wp-block-button.is-style-outline .wp-block-button__link { background: transparent; border: 2px solid #2563eb; color: #2563eb; }
+        .wp-block-button.is-style-outline .wp-block-button__link:hover { background: #2563eb; color: white; }
+        .wp-block-columns { display: flex; gap: 2rem; margin: 2rem 0; }
+        .wp-block-column { flex: 1; padding: 1.5rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .wp-block-image { margin: 1rem 0; }
+        .wp-block-image img { max-width: 100%; height: auto; border-radius: 8px; }
+        .wp-block-list { margin: 1rem 0; padding-left: 1.5rem; }
+        .wp-block-list li { margin: 0.5rem 0; }
+        
+        .wp-block-navigation { display: flex; gap: 2rem; align-items: center; }
+        .wp-block-navigation ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+        .wp-block-navigation a { color: #374151; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        .wp-block-navigation a:hover { color: #2563eb; }
+        .wp-block-social-links { display: flex; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+        .wp-block-social-links a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: #6b7280; color: white; border-radius: 50%; text-decoration: none; transition: all 0.2s; }
+        .wp-block-social-links a:hover { background: #2563eb; transform: translateY(-2px); }
+        
+        .pattern-section { margin: 3rem 0; padding: 2rem; border: 2px dashed #e2e8f0; border-radius: 8px; background: #fafbfc; }
+        .pattern-title { font-size: 1.25rem; font-weight: 600; color: #374151; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e7eb; }
+        
+        .golden-circle-cards { display: flex !important; flex-wrap: wrap !important; gap: 1.5rem !important; justify-content: center !important; }
+        .golden-card { flex: 1 !important; min-width: 200px !important; max-width: 250px !important; }
+        .hero-metrics { display: flex !important; flex-wrap: wrap !important; gap: 2rem !important; justify-content: center !important; }
+        .hero-metric { flex: 1 !important; min-width: 150px !important; max-width: 200px !important; }
+        
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); z-index: 1000; cursor: pointer; transition: all 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4); }
+        .whatsapp-float svg { width: 32px; height: 32px; fill: white; }
+        
+        /* Formularios */
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #374151; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        
+        /* Newsletter */
+        .newsletter-form { display: flex; gap: 1rem; align-items: end; }
+        .newsletter-input { flex: 1; }
+        
+        /* Timeline */
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #e5e7eb; }
+        .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -1.5rem; top: 0.5rem; width: 12px; height: 12px; background: #2563eb; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px #e5e7eb; }
+        
+        /* Team */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .team-member { text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        .team-member img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; }
+        
+        /* Gallery */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .gallery-item { aspect-ratio: 1; overflow: hidden; border-radius: 8px; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        
         /* Responsive */
         @media (max-width: 768px) {
-            .wp-block-columns {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .wp-block-buttons {
-                flex-direction: column;
-            }
-            
-            .wp-block-button__link {
-                width: 100%;
-                text-align: center;
-            }
+            .wp-block-columns { flex-direction: column !important; gap: 1rem !important; display: flex !important; }
+            .wp-block-column { flex: none !important; width: 100% !important; max-width: 100% !important; }
+            .wp-block-buttons { flex-direction: column; }
+            .wp-block-button__link { width: 100%; text-align: center; }
+            .wp-block-group { max-width: 100% !important; overflow: hidden; }
+            .pattern-section { padding: 1rem !important; }
+            .demo-container { padding: 1rem !important; }
+            .wp-block-navigation ul { flex-direction: column; gap: 1rem; }
+            .wp-block-social-links { justify-content: center; }
+            .golden-circle-cards { flex-direction: column !important; gap: 1rem !important; }
+            .golden-card { width: 100% !important; max-width: 100% !important; flex: none !important; }
+            .hero-metrics { flex-direction: column !important; gap: 1rem !important; }
+            .hero-metric { width: 100% !important; max-width: 100% !important; flex: none !important; }
+            .newsletter-form { flex-direction: column; }
+            .team-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
         }
-
-        /* Patrones específicos */
-        .pattern-section {
-            margin: 3rem 0;
-            padding: 2rem;
-            border: 2px dashed #e2e8f0;
-            border-radius: 8px;
-            background: #fafbfc;
-        }
-
-        .pattern-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e5e7eb;
-        }
-
-        /* WhatsApp Float */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            z-index: 1000;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
-        }
-
-        .whatsapp-float svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-        }
-
-        /* Formularios */
-        .wp-block-group form {
-            background: #f8fafc;
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #374151;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        /* Newsletter */
-        .newsletter-form {
-            display: flex;
-            gap: 1rem;
-            align-items: end;
-        }
-
-        .newsletter-input {
-            flex: 1;
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #e5e7eb;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-            padding-left: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -1.5rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            background: #2563eb;
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px #e5e7eb;
-        }
-
-        /* Team */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .team-member {
-            text-align: center;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .team-member img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-
-        /* Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .gallery-item {
-            aspect-ratio: 1;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Header y Footer */
-        .wp-block-navigation {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .wp-block-navigation ul {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .wp-block-navigation a {
-            color: #374151;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .wp-block-navigation a:hover {
-            color: #2563eb;
-        }
-
-        .wp-block-social-links {
-            display: flex;
-            gap: 0.5rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .wp-block-social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: #6b7280;
-            color: white;
-            border-radius: 50%;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .wp-block-social-links a:hover {
-            background: #2563eb;
-            transform: translateY(-2px);
-        }
-
-        /* Responsive para Header/Footer */
-        @media (max-width: 768px) {
-            .wp-block-navigation ul {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .wp-block-social-links {
-                justify-content: center;
-            }
+        
+        @media (max-width: 480px) {
+            .wp-block-columns { flex-direction: column !important; gap: 0.75rem !important; }
+            .wp-block-column { width: 100% !important; flex: none !important; }
+            .pattern-section { padding: 0.5rem !important; }
+            .demo-container { padding: 0.5rem !important; }
+            .golden-circle-cards { gap: 0.75rem !important; }
+            .golden-card .wp-block-group { padding: 16px !important; }
+            .hero-metrics { gap: 0.75rem !important; }
+            .hero-metric { padding: 1rem !important; }
         }
     </style>
 </head>
 <body>
-    <!-- Header del Demo -->
     <div class="demo-header">
         <div class="demo-title">🎨 Aqua Patterns - Demo Gutenberg</div>
         <div class="demo-controls">
@@ -478,14 +129,11 @@
                 <button class="device-btn" onclick="setViewport('mobile')">📱 Móvil</button>
             </div>
             <div>
-                <button onclick="togglePatterns()" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    🔄 Recargar Patrones
-                </button>
+                <button onclick="togglePatterns()" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">🔄 Recargar Patrones</button>
             </div>
         </div>
     </div>
 
-    <!-- Contenedor Principal -->
     <div class="demo-container">
         <div class="viewport desktop" id="viewport">
             
@@ -527,20 +175,20 @@
                             <a class="wp-block-button__link" href="" style="border: 2px solid #2563eb; color: #2563eb; background: transparent; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500;">Descarga Guía Gratuita</a>
                         </div>
                     </div>
-                    <div class="wp-block-columns" style="display: flex; gap: 2rem; max-width: 800px; margin: 0 auto;">
-                        <div class="wp-block-column" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <div class="wp-block-columns hero-metrics" style="display: flex; gap: 2rem; max-width: 800px; margin: 0 auto; flex-wrap: wrap;">
+                        <div class="wp-block-column hero-metric" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-width: 150px;">
                             <h3 style="font-size: 2rem; font-weight: 700; color: #2563eb; margin: 0 0 0.5rem 0;">1,200+</h3>
                             <p style="margin: 0; color: #6b7280;"><strong>Personas</strong><br/>Beneficiadas</p>
                         </div>
-                        <div class="wp-block-column" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <div class="wp-block-column hero-metric" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-width: 150px;">
                             <h3 style="font-size: 2rem; font-weight: 700; color: #2563eb; margin: 0 0 0.5rem 0;">25+</h3>
                             <p style="margin: 0; color: #6b7280;"><strong>Comunidades</strong><br/>Atendidas</p>
                         </div>
-                        <div class="wp-block-column" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <div class="wp-block-column hero-metric" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-width: 150px;">
                             <h3 style="font-size: 2rem; font-weight: 700; color: #2563eb; margin: 0 0 0.5rem 0;">15+</h3>
                             <p style="margin: 0; color: #6b7280;"><strong>Proyectos</strong><br/>Exitosos</p>
                         </div>
-                        <div class="wp-block-column" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <div class="wp-block-column hero-metric" style="flex: 1; text-align: center; padding: 1.5rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-width: 150px;">
                             <h3 style="font-size: 2rem; font-weight: 700; color: #2563eb; margin: 0 0 0.5rem 0;">98%</h3>
                             <p style="margin: 0; color: #6b7280;"><strong>Satisfacción</strong></p>
                         </div>
@@ -550,26 +198,33 @@
 
             <!-- Golden Circle Pattern -->
             <div class="pattern-section">
-                <div class="pattern-title">🔄 Golden Circle</div>
+                <div class="pattern-title">🔄 Golden Circle — 4 Tarjetas</div>
                 <div class="wp-block-group">
-                    <h2 class="wp-block-heading has-text-align-center">¿Por qué elegirnos?</h2>
-                    <div class="wp-block-columns">
-                        <div class="wp-block-column">
-                            <h3 class="wp-block-heading">¿Por qué?</h3>
-                            <p class="wp-block-paragraph">Creemos que cada empresa merece una presencia digital excepcional que refleje su verdadero potencial.</p>
+                    <p class="wp-block-paragraph has-text-align-center" style="font-size: 1.25rem; margin-bottom: 2rem; color: #6b7280;">Transformamos territorios combinando sabiduría ancestral con innovación moderna.</p>
+                    <div class="wp-block-columns golden-circle-cards" style="display: flex; gap: 1.5rem; max-width: 1000px; margin: 0 auto; flex-wrap: wrap;">
+                        <div class="wp-block-column golden-card" style="flex: 1; min-width: 200px;">
+                            <div class="wp-block-group" style="background: #f3f4f6; border-radius: 20px; padding: 24px; text-align: center; width: 100%; box-sizing: border-box;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 1rem 0; color: #374151;">¿Por qué lo hacemos?</h3>
+                                <p style="margin: 0; color: #6b7280;">Oportunidades equitativas</p>
+                            </div>
                         </div>
-                        <div class="wp-block-column">
-                            <h3 class="wp-block-heading">¿Cómo?</h3>
-                            <p class="wp-block-paragraph">Combinamos diseño creativo, tecnología avanzada y estrategia digital para crear soluciones únicas.</p>
+                        <div class="wp-block-column golden-card" style="flex: 1; min-width: 200px;">
+                            <div class="wp-block-group" style="background: #f3f4f6; border-radius: 20px; padding: 24px; text-align: center; width: 100%; box-sizing: border-box;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 1rem 0; color: #374151;">¿Cómo lo hacemos?</h3>
+                                <p style="margin: 0; color: #6b7280;">Enfoque participativo</p>
+                            </div>
                         </div>
-                        <div class="wp-block-column">
-                            <h3 class="wp-block-heading">¿Qué?</h3>
-                            <p class="wp-block-paragraph">Desarrollamos sitios web, aplicaciones y estrategias digitales que impulsan el crecimiento.</p>
+                        <div class="wp-block-column golden-card" style="flex: 1; min-width: 200px;">
+                            <div class="wp-block-group" style="background: #f3f4f6; border-radius: 20px; padding: 24px; text-align: center; width: 100%; box-sizing: border-box;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 1rem 0; color: #374151;">¿Qué hacemos?</h3>
+                                <p style="margin: 0; color: #6b7280;">Programas educativos</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="wp-block-buttons">
-                        <div class="wp-block-button">
-                            <a class="wp-block-button__link" href="#servicios">Conocer Más</a>
+                        <div class="wp-block-column golden-card" style="flex: 1; min-width: 200px;">
+                            <div class="wp-block-group" style="background: #f3f4f6; border-radius: 20px; padding: 24px; text-align: center; width: 100%; box-sizing: border-box;">
+                                <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 1rem 0; color: #374151;">¿Para quién?</h3>
+                                <p style="margin: 0; color: #6b7280;">Comunidades locales</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -871,7 +526,6 @@
         </div>
     </div>
 
-    <!-- WhatsApp Float -->
     <div class="whatsapp-float" onclick="openWhatsApp()">
         <svg viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
@@ -879,33 +533,18 @@
     </div>
 
     <script>
-        // Función para cambiar viewport
         function setViewport(device) {
             const viewport = document.getElementById('viewport');
             const buttons = document.querySelectorAll('.device-btn');
-            
-            // Remover clase active de todos los botones
             buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Agregar clase active al botón clickeado
             event.target.classList.add('active');
-            
-            // Cambiar clase del viewport
             viewport.className = `viewport ${device}`;
         }
-
-        // Función para recargar patrones
-        function togglePatterns() {
-            location.reload();
-        }
-
-        // Función para abrir WhatsApp
+        function togglePatterns() { location.reload(); }
         function openWhatsApp() {
             const message = encodeURIComponent('Hola! Me interesa conocer más sobre sus servicios de desarrollo web.');
             window.open(`https://wa.me/1234567890?text=${message}`, '_blank');
         }
-
-        // Función para manejar formulario de contacto
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('form');
             if (form) {
